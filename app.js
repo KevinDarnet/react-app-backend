@@ -1,8 +1,10 @@
+import "dotenv/config.js"; //configurar las variables de entorde de la app
 import express from "express";
 import path from "path";
 import logger from "morgan";
 import indexRouter from "./routes/index.js";
 import { __dirname } from "./utils.js";
+import cors from "cors"; //permite cuzar el port de back con el de front
 
 let app = express();
 
@@ -16,6 +18,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 //Endpoints... colocamos en indexRouter /api
 app.use("/api", indexRouter);
